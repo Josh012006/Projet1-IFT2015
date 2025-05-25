@@ -24,6 +24,7 @@
 package lindenmayer;
 
 
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Iterator;
 import java.util.List;
@@ -38,7 +39,7 @@ import org.json.JSONObject;
  * The implementation builds its data structures 
  * by calling {@link #addRule(Symbol, String)}, 
  * {@link #setAxiom(String)} and {@link #setAction(char, String)}. 
- * The method {@link #initFromJSON(String, Turtle)} parses an input file.
+ * The method {@link #initFromJson(JSONObject, Turtle)} parses an input file.
  * 
  * <p><strong>Using the L-system. </strong>
  * The implementation provides access to symbols as instances of {@link Symbol}, and 
@@ -46,7 +47,7 @@ import org.json.JSONObject;
  * (Note that implementing classes do not 
  * need to store an actual backing list or array for the iterator, 
  * but could calculate 
- * {@link java.util.Iterator#next() } 
+ * {@link Iterator#next() }
  * on the fly.) As a consequence, they can be read only once. 
  * 
  * <p><strong>Random rules.</strong>Implementing classes will need to 
@@ -87,7 +88,7 @@ public abstract class AbstractLSystem
     /**
      * Initializes the random-number generator with a given seed. 
      * 
-     * @param init_random_seed seed used at initialization
+     * @param seed seed used at initialization
      */
     protected AbstractLSystem(long seed)
     {
@@ -148,7 +149,7 @@ public abstract class AbstractLSystem
      */
     /**
      * Registers a new character in the alphabet and associates a turtle action with it;
-     * expected to be called before {@link #setAxiom(String)} and {@link #addRule(char, String)}
+     * expected to be called before {@link #setAxiom(String)} and {@link #addRule(Symbol, String)}
      *  
      * This method is called while parsing the input (specifying the alphabet for the L-system).
      * 
@@ -187,7 +188,7 @@ public abstract class AbstractLSystem
      * @param sym symbol on left-hand side that is rewritten by this rule
      * @param expansion sequence on right-hand side
      */
-    public abstract void addRule(char sym, String expansion);
+    public abstract void addRule(Symbol sym, String expansion);
     
  
     /*
@@ -247,7 +248,7 @@ public abstract class AbstractLSystem
      * calling
      * {@link #setAction(char, String)}, {@link #setAxiom(String)}, {@link #addRule(Symbol, String)}
      * for grammar specification and {@link Turtle#setUnits(double, double)}, 
-     * {@link Turtle#init(java.awt.geom.Point2D, double)}
+     * {@link Turtle#init(Point2D, double)}
      * for turtle drawing setup. 
      */
     protected abstract void initFromJson(JSONObject obj, Turtle turtle);
