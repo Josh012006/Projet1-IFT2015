@@ -40,6 +40,15 @@ public class LSystem extends AbstractLSystem {
 
     /* initialisation par fichier JSON */
     protected void initFromJson(JSONObject obj, Turtle turtle) {
-
+        JSONObject actions = obj.getJSONObject("actions");
+        for (String code: actions.keySet()) {
+            String action = actions.getString(code);
+            char c = code.charAt(0);
+            this.setAction(c, action);
+        }
+        String axiom = obj.getString("axiom");
+        this.setAxiom(axiom);
+        
+        /* A completer pour le numéro c */
     };
 }
