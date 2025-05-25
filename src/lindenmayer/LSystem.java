@@ -16,6 +16,10 @@ import org.json.JSONObject;
  */
 public class LSystem extends AbstractLSystem {
 
+    /*
+    The variables used to keep track of important information for the system
+     */
+
     // The axiom
     private List<Symbol> axiom = new ArrayList<>();
 
@@ -46,8 +50,12 @@ public class LSystem extends AbstractLSystem {
         this.symbAct = new HashMap<>();
     }
 
+
+    /*
+    System initialization methods
+    */
+
     @Override
-    /* méthodes d’initialisation de système */
     public Symbol setAction(char sym, String action) throws IllegalArgumentException {
         if (!actions.contains(action)) {
             throw new IllegalArgumentException("Invalid action: " + action);
@@ -94,7 +102,10 @@ public class LSystem extends AbstractLSystem {
     }
 
 
-    /* accès aux règles et exécution */
+    /*
+    Rules access and execution
+    */
+
     @Override
     public Iterator<Symbol> getAxiom(){
         return this.axiom.iterator();
@@ -150,36 +161,38 @@ public class LSystem extends AbstractLSystem {
 
 
 
-    /* inférence + dessin */
-    /* retourne BoundingBox pour le dessin */
+    /*
+    Inference + Drawing
+    Return BoundingBox for drawing
+    */
+
     @Override
     public Rectangle2D tell(Turtle T, Iterator<Symbol> seq, int n){
 
         if(n == 0) {
+            // initializing variables for computation of rectangle's bounds
             double xmin = Double.POSITIVE_INFINITY;
             double xmax = Double.NEGATIVE_INFINITY;
             double ymin = Double.POSITIVE_INFINITY;
             double ymax = Double.NEGATIVE_INFINITY;
 
             while(seq.hasNext()) {
+                // For each symbol, perform the modification on the turtle's position
                 Symbol sym = seq.next();
                 tell(T, sym);
+
+                // Get the new position of the turtle
                 double newX = T.getPosition().getX();
                 double newY = T.getPosition().getY();
-                if(newX < xmin) {
-                    xmin = newX;
-                }
-                if(newY < ymin) {
-                    ymin = newY;
-                }
-                if(newX > xmax) {
-                    xmax = newX;
-                }
-                if(newY > ymax) {
-                    ymax = newY;
-                }
+
+                // Do a quick comparison to see if any of the rectangle's bounds should be changed
+                if(newX < xmin) { xmin = newX; }
+                if(newY < ymin) { ymin = newY; }
+                if(newX > xmax) { xmax = newX; }
+                if(newY > ymax) { ymax = newY; }
             }
 
+            // The final rectangle that is returned after the recursion
             return new Rectangle2D.Double(xmin, ymin, xmax - xmin, ymax - ymin);
 
         }
@@ -188,25 +201,37 @@ public class LSystem extends AbstractLSystem {
             List<Iterator<Symbol>> iteratorList = new ArrayList<>();
 
             while(seq.hasNext()) {
+                // For each symbol rewrite it using a random rule
                 Symbol sym = seq.next();
                 Iterator<Symbol> rewritten = rewrite(sym);
 
-                if(rewritten != null) {
+                if(rewritten != null) { // If no rule is defined, just return the symbol as is
                     iteratorList.add(rewritten);
                 }
                 else {
+                    // If not, add the rewritten sequence to the table to later
+                    // be combined with the other rewritten sequences
+
                     List<Symbol> dummyList = new ArrayList<>();
                     dummyList.add(sym);
                     iteratorList.add(dummyList.iterator());
                 }
             }
 
-            return tell(T, chain(iteratorList), n - 1);
+            // Assemble all the rewritten symbols in one new sequence to pass
+            // for the next round
+            Iterator<Symbol> newSeq = chain(iteratorList);
+            return tell(T, newSeq, n - 1);
         }
 
     }
 
-    /* initialisation par fichier JSON */
+
+
+    /*
+    Initialization via JSON file
+    */
+
     @Override
     protected void initFromJson(JSONObject obj, Turtle turtle) {
         JSONObject actions = obj.getJSONObject("actions");
@@ -218,6 +243,6 @@ public class LSystem extends AbstractLSystem {
         String axiom = obj.getString("axiom");
         this.setAxiom(axiom);
 
-        /* A completer pour le numéro c */
+        /* To complete for the number c task */
     };
 }
