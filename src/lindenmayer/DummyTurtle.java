@@ -25,15 +25,15 @@ public class DummyTurtle implements Turtle {
     private double unitStep;
     private double unitAngleDeg;
     // Pile d’états
-    private Deque<State> stack = new ArrayDeque<>();
+    private final Deque<State> stack;
 
-    //Initialise la tortue à (0,0) angle 0 par défaut et vide la pile.
+    //Initialise la tortue à (0,0) angle 0 par défaut et la pile d'état.
     public DummyTurtle() {
         currentPos = new Point2D.Double(0.0, 0.0);
         currentAngleDeg = 0.0;
         unitStep = 1.0;
         unitAngleDeg = 90.0;
-        stack.clear();
+        stack = new ArrayDeque<>();
     }
 
     @Override
@@ -73,7 +73,7 @@ public class DummyTurtle implements Turtle {
 
     @Override
     public void draw() {
-        // même comportement que move(), sans tracé visible
+        // même comportement que move(), avec tracé
         move();
     }
 
