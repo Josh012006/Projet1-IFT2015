@@ -1,10 +1,12 @@
 package lindenmayer;
 
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Point2D;
 import java.util.*;
 
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 
 /**
@@ -249,7 +251,7 @@ public class LSystem extends AbstractLSystem {
                 throw new IllegalArgumentException("Symbole non déclaré dans actions : " + c);
             }
             // Récupère le tableau JSON de chaînes d’expansion
-            org.json.JSONArray expansions = rulesObj.getJSONArray(lhsChar);
+            JSONArray expansions = rulesObj.getJSONArray(lhsChar);
             for (int i = 0; i < expansions.length(); i++) {
                 String rightSide = expansions.getString(i);
                 this.addRule(sym, rightSide);
@@ -260,14 +262,14 @@ public class LSystem extends AbstractLSystem {
         JSONObject params = obj.getJSONObject("parameters");
         double step = params.getDouble("step");
         double angleUnit = params.getDouble("angle");
-        org.json.JSONArray startArr = params.getJSONArray("start");
+        JSONArray startArr = params.getJSONArray("start");
         double x0 = startArr.getDouble(0);
         double y0 = startArr.getDouble(1);
         double theta0 = startArr.getDouble(2);
 
         // On configure la tortue
         turtle.setUnits(step, angleUnit);
-        turtle.init(new java.awt.geom.Point2D.Double(x0, y0), theta0);
-        }
-    };
+        turtle.init(new Point2D.Double(x0, y0), theta0);
+    }
+};
 
