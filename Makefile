@@ -38,6 +38,7 @@ classes: $(BIN_DIR)
 jar: classes
 	$(JAR) cfe $(JAR_NAME) $(MAIN_CLASS) \
 		-C $(BIN_DIR) . \
+		-C $(SRC_DIR) . \
 		-C $(LIB_DIR) $(notdir $(JSON_JAR))
 
 # Exécution du programme
