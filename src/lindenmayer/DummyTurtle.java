@@ -5,8 +5,12 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * DummyTurtle : tortue « à crayon imaginaire »
- * Implémente Turtle en enregistrant la position, l’angle et la pile d’états.
+ * Class implementing an imaginary pencil.
+ *
+ *This class implements the methods of the Turtle interface. Its main use is to
+ * keep track of the position, angle and state stack during the drawing.
+ *
+ * @author Josué Mongan (20290870) and David Stanescu(20314518)
  */
 public class DummyTurtle implements Turtle {
 
@@ -73,8 +77,12 @@ public class DummyTurtle implements Turtle {
 
     @Override
     public void draw() {
-        // même comportement que move(), avec tracé
-        move();
+        // calcule le déplacement en fonction de currentAngleDeg
+        double rad = Math.toRadians(currentAngleDeg);
+        double dx = unitStep * Math.cos(rad);
+        double dy = unitStep * Math.sin(rad);
+        currentPos.x += dx;
+        currentPos.y += dy;
     }
 
     @Override
@@ -88,12 +96,12 @@ public class DummyTurtle implements Turtle {
     }
 
     @Override
-    public void turnR() {
+    public void turnL() {
         currentAngleDeg -= unitAngleDeg;
     }
 
     @Override
-    public void turnL() {
+    public void turnR() {
         currentAngleDeg += unitAngleDeg;
     }
 

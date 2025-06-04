@@ -117,8 +117,8 @@ Le L-système est décrit dans un fichier JSON respectant la syntaxe suivante :
     # Génère l'archive exécutable JAR
     make jar
    
-    # Exécute le programme avec des arguments
-    make run ARGS="test/buisson.json 5"
+    # Exécute le programme avec des arguments et redirige la sortie standard dans le fichier eps
+    make run ARGS="test/buisson.json 5 > buisson5.eps"
    
     # Supprime les fichiers compilés et l'archive JAR
     make clean

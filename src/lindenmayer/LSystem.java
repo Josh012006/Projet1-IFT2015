@@ -63,7 +63,7 @@ public class LSystem extends AbstractLSystem {
             throw new IllegalArgumentException("Invalid action: " + action);
         }
 
-        if(this.alphabet.containsKey(sym) || this.symbAct.containsValue(action)) {
+        if(this.alphabet.containsKey(sym)) {
             throw new IllegalArgumentException("Symbol or action was already associated");
         }
 
