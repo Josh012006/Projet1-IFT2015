@@ -1,5 +1,11 @@
 # Comment dessiner un arbre (Projet L-système)
 
+## Aperçu
+
+<div align="center">
+    <img src="test/buisson5.png" alt="lindenmayer for a bush after 5 iterations">
+</div>
+
 ## Description
 
 Ce projet implémente un générateur de dessins de structures arborescentes à l'aide d'un **L-système** (Lindenmayer system) et d'une **tortue graphique** (Turtle Graphics). Il s'agit de développer une application Java capable :
