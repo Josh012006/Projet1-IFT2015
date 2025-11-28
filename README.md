@@ -4,6 +4,14 @@
 
 <div align="center">
     <img src="test/buisson5.png" alt="lindenmayer for a bush after 5 iterations">
+    <p>Schéma buisson après 5 itérations</p>
+</div>
+
+<br/> 
+
+<div align="center">
+    <img src="test/buisson6.png" alt="lindenmayer for a bush after 6 iterations">
+    <p>Schéma buisson après 6 itérations</p>
 </div>
 
 ## Description
