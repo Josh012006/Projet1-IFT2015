@@ -50,7 +50,7 @@ Pour rouler le projet, il est nécesssaire d'avoir sur sa machine :
 Exemple :
 
 ```
-java -jar lindenmayer.jar test/buisson.json 5 > buisson5.eps
+java -jar lindenmayer.jar test/buisson.json 5 > test/buisson5.eps
 ```
 
 ## Structure du projet
@@ -143,7 +143,7 @@ Le L-système est décrit dans un fichier JSON respectant la syntaxe suivante :
     make jar
    
     # Exécute le programme avec des arguments et redirige la sortie standard dans le fichier eps
-    make run ARGS="test/buisson.json 5 > test/buisson.eps"
+    make run ARGS="test/buisson.json 5 > test/buisson5.eps"
    
     # Supprime les fichiers compilés et l'archive JAR
     make clean
