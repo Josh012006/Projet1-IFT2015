@@ -135,7 +135,7 @@ Le L-système est décrit dans un fichier JSON respectant la syntaxe suivante :
     make jar
    
     # Exécute le programme avec des arguments et redirige la sortie standard dans le fichier eps
-    make run ARGS="test/buisson.json 5 > buisson.eps"
+    make run ARGS="test/buisson.json 5 > test/buisson.eps"
    
     # Supprime les fichiers compilés et l'archive JAR
     make clean
@@ -146,7 +146,7 @@ Le L-système est décrit dans un fichier JSON respectant la syntaxe suivante :
 Pour voir l'image sortie par le fichier .eps généré, il faut installer GhostScript et exécuter la commande :
 
 ```bash
-eps2pdf mon_fichier.eps
+eps2pdf test/mon_fichier.eps
 ```
 
 ## Structure du dépôt GitHub
