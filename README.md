@@ -16,6 +16,17 @@ Ce projet implémente un générateur de dessins de structures arborescentes à 
 
 L'objectif principal est de produire, par la ligne de commande, un fichier `.eps` contenant le dessin de l'arbre généré, prêt à être converti en PDF ou affiché dans un visualiseur PostScript.
 
+## Prérequis
+
+Pour rouler le projet, il est nécesssaire d'avoir sur sa machine :
+
+- Une installation complète du **JDK** (version 17 ou ultérieure) pour compiler et exécuter les fichiers sources Java.
+- La présence de **make** pour automatiser la compilation et l’assemblage du projet : GNU Make sous Linux/macOS ou MinGW Make sous Windows.
+- La bibliothèque **JSON** incluse dans le projet, située dans le répertoire `lib/`, sous la forme d’un fichier `json-YYYYMMDD.jar`, nécessaire pour analyser les fichiers de description des L-systèmes.
+- Un système capable d’exécuter la commande **jar** (fournie avec le JDK) pour créer l’archive exécutable du programme.
+- Un terminal permettant d’utiliser les commandes du Makefile, dont la création du JAR, l’exécution du programme et les opérations de nettoyage.
+
+
 ## Fonctionnalités
 
 * **Interprétation JSON** : Lecture d'un fichier JSON spécifiant l'axiome (chaîne initiale), les règles de réécriture (éventuellement multiples par symbole), les actions associées à chaque caractère (draw, move, turnL, turnR, push, pop) et les paramètres de la tortue (pas, angle et position de départ).
@@ -129,6 +140,14 @@ Le L-système est décrit dans un fichier JSON respectant la syntaxe suivante :
     # Supprime les fichiers compilés et l'archive JAR
     make clean
    ```
+   
+## Visualiser le PDF
+
+Pour voir l'image sortie par le fichier .eps généré, il faut installer GhostScript et exécuter la commande :
+
+```bash
+eps2pdf mon_fichier.eps
+```
 
 ## Structure du dépôt GitHub
 
